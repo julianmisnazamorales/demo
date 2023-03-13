@@ -14,43 +14,46 @@ public abstract class Category {
     protected String name;
 
     /**
-     * Node level
-     */
-    protected int level;
-
-    /**
      *
      */
     protected List<Category> categories = new ArrayList<>();
+
+    /**
+     *Node parent
+     */
+    protected Category parent;
 
     public String getName() {
         return name;
     }
 
-    public int getLevel() {
-        return level;
+    public void setParent(Category parent) {
+        this.parent = parent;
     }
+
+    protected Category(String name, List<Category> categories){
+        this.name = name;
+        this.categories = categories;
+    }
+
+    protected Category(Category category){
+        this.name = category.getName();
+    }
+
 
     public List<Category> getCategories() {
         return categories;
     }
 
     /**
-     *
-     * @param keyWords
-     * Keywords to be search
-     * @return
+     * Add a new category on the tree. As assumption I will to add the node to the current category
+     * @param sonCategory
+     * New Category to add
      */
-    protected Category findCategoryFromKeyWords(List<String> keyWords){
-        return null;
+    public void addCategory(Category sonCategory){
+        sonCategory.setParent(this);
+        categories.add(sonCategory);
     }
 
-    /**
-     * Get node level
-     * @return
-     */
-    protected int  getLevelFromRoot(){
-        return 0;
-    }
 
 }
